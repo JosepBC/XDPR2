@@ -1,0 +1,15 @@
+Msg enviat pel client (regio sanitaria):
+	- Capçalera: Regio sanitaria
+	- Nous positius en ultimes 24h
+	- Defuncions ultimes 24h
+	- Altes UCI ultimes 24h
+	- Baixes UCI ultimes 24h
+
+	- Ultim paquet: centinella -> "\0"
+
+
+Servidor respon amb mitjanes per regio sanitaria:
+	- Mitjana positius per dia
+	- Mitjana defuncions per dia
+	- Mitjana altes UCI
+	- Mitjana baixes UCI
