@@ -1,5 +1,10 @@
 package com.servidor.xdpr2;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  * Classe amb tota l'informacio que ha de contenir un missatge sobre un hospital ja sigui en el cas Client a Servidor o Servidor a Client
  * En el cas Servidor a Client es retornen les mitjanes
@@ -23,6 +28,21 @@ public class Message {
         this.deaths = deaths;
         this.newICU = newICU;
         this.releasesICU = releasesICU;
+    }
+
+    public Message() {
+        this.sanaitaryRegion = null;
+        this.positives = 0;
+        this.deaths = 0;
+        this.newICU = 0;
+        this.releasesICU = 0;
+    }
+
+    public void writeToFile (String fileName) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
+        String info = this.sanaitaryRegion + " " + this.positives + " " + this.deaths + " " + this.newICU + " " + this.releasesICU + "\n";
+        writer.append(info);
+        writer.close();
     }
 
     /**
@@ -63,5 +83,25 @@ public class Message {
      */
     public int getReleasesICU() {
         return releasesICU;
+    }
+
+    public void setSanaitaryRegion(String sanaitaryRegion) {
+        this.sanaitaryRegion = sanaitaryRegion;
+    }
+
+    public void setPositives(int positives) {
+        this.positives = positives;
+    }
+
+    public void setDeaths(int deaths) {
+        this.deaths = deaths;
+    }
+
+    public void setNewICU(int newICU) {
+        this.newICU = newICU;
+    }
+
+    public void setReleasesICU(int releasesICU) {
+        this.releasesICU = releasesICU;
     }
 }
