@@ -1,4 +1,4 @@
-package com.servidor.xdpr2;
+package xdpr2.servidor;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

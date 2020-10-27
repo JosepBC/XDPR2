@@ -1,7 +1,6 @@
-package com.servidor.xdpr2;
+package xdpr2.servidor;
 
 import java.io.BufferedWriter;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 
