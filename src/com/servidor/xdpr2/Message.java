@@ -38,6 +38,21 @@ public class Message {
         this.releasesICU = 0;
     }
 
+    public void addAndSetAll(Message toCopy) {
+        this.sanaitaryRegion = toCopy.getSanaitaryRegion();
+        this.deaths += toCopy.getDeaths();
+        this.newICU += toCopy.getNewICU();
+        this.positives += toCopy.getPositives();
+        this.releasesICU += toCopy.getReleasesICU();
+    }
+
+    public void average(int nHospitals) {
+        this.deaths /= nHospitals;
+        this.releasesICU /= nHospitals;
+        this.positives /= nHospitals;
+        this.newICU /= nHospitals;
+    }
+
     public void writeToFile (String fileName) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
         String info = this.sanaitaryRegion + " " + this.positives + " " + this.deaths + " " + this.newICU + " " + this.releasesICU + "\n";
