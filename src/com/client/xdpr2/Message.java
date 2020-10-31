@@ -9,6 +9,7 @@ public class Message {
     private String sanaitaryRegion;
     private int positives, deaths, newICU, releasesICU;
 
+
     /**
      * Constructor basic d'un missatge.
      * @param sanaitaryRegion Regio sanitaria a la cual pertany l'hospital
@@ -63,5 +64,19 @@ public class Message {
      */
     public int getReleasesICU() {
         return releasesICU;
+    }
+
+    /**
+     * Metode toString dels parametres
+     * @return cadena de caracters
+     */
+    public String toString() {
+        return "Message{" +
+                "sanaitaryRegion='" + sanaitaryRegion + '\'' +
+                ", positives=" + positives +
+                ", deaths=" + deaths +
+                ", newICU=" + newICU +
+                ", releasesICU=" + releasesICU +
+                '}';
     }
 }
