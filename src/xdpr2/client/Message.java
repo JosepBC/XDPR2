@@ -1,4 +1,4 @@
-package com.client.xdpr2;
+package xdpr2.client;
 
 /**
  * Classe amb tota l'informacio que ha de contenir un missatge sobre un hospital ja sigui en el cas Client a Servidor o Servidor a Client

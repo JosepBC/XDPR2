@@ -1,4 +1,4 @@
-package com.client.xdpr2;
+package xdpr2.client;
 
 import java.io.IOException;
 import java.net.Socket;
