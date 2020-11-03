@@ -118,4 +118,15 @@ public class Message {
     public void setReleasesICU(int releasesICU) {
         this.releasesICU = releasesICU;
     }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "sanaitaryRegion='" + sanaitaryRegion + '\'' +
+                ", positives=" + positives +
+                ", deaths=" + deaths +
+                ", newICU=" + newICU +
+                ", releasesICU=" + releasesICU +
+                '}';
+    }
 }
