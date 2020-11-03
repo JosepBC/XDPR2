@@ -3,10 +3,12 @@ package xdpr2.servidor;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
 
 public class MTServer {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         ServerSocket serverSocket = null;
+        DataBase db = new DataBase();
 
         try {
             serverSocket = new ServerSocket(1234);
@@ -17,14 +19,16 @@ public class MTServer {
 
         Socket connectionSocket = null;
 
-        for (;;) {
-            try {
+        try {
+            for (;;) {
                 connectionSocket = serverSocket.accept();
-                new AttendPetition(connectionSocket).start();
-            } catch (IOException e) {
-                System.out.println("Error al aceptar la peticio");
-                e.printStackTrace();
+                new AttendPetition(connectionSocket, db).start();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
         }
+
     }
 }
