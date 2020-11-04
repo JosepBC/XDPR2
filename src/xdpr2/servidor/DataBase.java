@@ -5,7 +5,7 @@ import xdpr2.common.Message;
 
 public class DataBase {
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://localhost/server?serverTimezone=Europe/Madrid";
+    private static final String DB_URL = "jdbc:mysql://localhost/?serverTimezone=Europe/Madrid";
 
     //Database credentials
     private static final String USER = "root";
@@ -90,6 +90,8 @@ public class DataBase {
             st = con.createStatement();
             String sqlSt = "CREATE DATABASE IF NOT EXISTS server";
             st.executeUpdate(sqlSt);
+            //select DB to use
+            st.execute("USE server");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
