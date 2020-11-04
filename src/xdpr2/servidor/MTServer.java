@@ -13,7 +13,6 @@ public class MTServer {
         try {
             serverSocket = new ServerSocket(1234);
         } catch (IOException e) {
-            System.out.println("Error al fer la connexio");
             e.printStackTrace();
         }
 
@@ -29,6 +28,7 @@ public class MTServer {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
+            System.out.println("Tancant connexio amb la base de dades");
             db.close();
         }
 
