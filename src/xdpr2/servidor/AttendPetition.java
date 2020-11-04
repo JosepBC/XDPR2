@@ -6,6 +6,10 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
+
+import xdpr2.common.Message;
 
 public class AttendPetition extends Thread {
     private Socket connectionSocket;
@@ -18,35 +22,40 @@ public class AttendPetition extends Thread {
 
     public void run() {
         try {
+            ObjectOutputStream objectOutput = new ObjectOutputStream(connectionSocket.getOutputStream());
             ObjectInputStream objectInput = new ObjectInputStream(connectionSocket.getInputStream());
 
-            Message avg = new Message();
-            Message act;
-            int nMessages = 0;
+            Message<Float> avg = new Message();
+            List<Message<Integer>> msgList = new LinkedList<>();
+            Message<Integer> act;
             String region = "";
 
             //Rebre tots els msg del client fins que envii el centinella (null)
             do {
                 act = (Message) objectInput.readObject();
                 if(act != null) {
+                    msgList.add(act);
                     db.updateDataOfSanitaryRegion(act);
-                    region = act.getSanaitaryRegion();
-                    nMessages++;
+                    region = act.getSanitaryRegion();
                 }
             } while(act != null);
 
             //Si el client envia algun msg calculo la mitja i escric a fitxer, sino retorno l'objecte amb tot a 0 i nom null
-            if(nMessages > 0) {
+            String fileName = ".\\logs\\"+region+ LocalDateTime.now().toString() + ".txt";
+            fileName = fileName.replace(":", ".");
+            for(Message<Integer> msg : msgList) {
+                msg.writeToFile(fileName);
+            }
+
+            if(msgList.size() > 0) {
                 avg = db.getAvgLast24h(region);
-                String fileName = avg.getSanaitaryRegion() + "_" + LocalDateTime.now().toString() + ".txt";
-                fileName.replace(":", ".");
-                avg.writeToFile(fileName);
             }
 
             //Retornar al client
-            ObjectOutputStream objectOutput = new ObjectOutputStream(connectionSocket.getOutputStream());
             objectOutput.writeObject(avg);
 
+            objectInput.close();
+            objectOutput.close();
             this.connectionSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
