@@ -1,6 +1,7 @@
 package xdpr2.servidor;
 
 import java.sql.*;
+import xdpr2.common.Message;
 
 public class DataBase {
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -40,8 +41,8 @@ public class DataBase {
      * @param newMsg Nou msg a afegir a la base de dades
      */
     public void updateDataOfSanitaryRegion(Message newMsg) throws SQLException {
-        if(!tableExists(newMsg.getSanaitaryRegion())) createTable(newMsg.getSanaitaryRegion());
-        String sqlSt =  "INSERT INTO " + newMsg.getSanaitaryRegion() +
+        if(!tableExists(newMsg.getSanitaryRegion())) createTable(newMsg.getSanitaryRegion());
+        String sqlSt =  "INSERT INTO " + newMsg.getSanitaryRegion() +
                         " VALUES (" + newMsg.getPositives() + ", " + newMsg.getDeaths() + ", "+ newMsg.getNewICU() + ", " + newMsg.getReleasesICU() + ", CURRENT_TIMESTAMP )";
         st.executeUpdate(sqlSt);
      }
@@ -65,11 +66,11 @@ public class DataBase {
         Message msg = new Message();
 
         if(rs.next()) {
-            msg.setSanaitaryRegion(sanitaryRegion);
-            msg.setDeaths(Math.round(rs.getFloat("deaths")));
-            msg.setPositives(Math.round(rs.getFloat("positives")));
-            msg.setNewICU(Math.round(rs.getFloat("newICU")));
-            msg.setReleasesICU(Math.round(rs.getFloat("releasesICU")));
+            msg.setSanitaryRegion(sanitaryRegion);
+            msg.setDeaths(rs.getFloat("deaths"));
+            msg.setPositives(rs.getFloat("positives"));
+            msg.setNewICU(rs.getFloat("newICU"));
+            msg.setReleasesICU(rs.getFloat("releasesICU"));
         }
 
         return msg;
