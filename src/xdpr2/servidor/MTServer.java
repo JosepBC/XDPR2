@@ -21,7 +21,9 @@ public class MTServer {
 
         try {
             for (;;) {
+                System.out.println("Esperant connexio....");
                 connectionSocket = serverSocket.accept();
+                System.out.println("Connexio establerta amb un nou client");
                 new AttendPetition(connectionSocket, db).start();
             }
         } catch (IOException e) {

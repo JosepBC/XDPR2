@@ -2,6 +2,7 @@ package xdpr2.servidor;
 
 import java.util.LinkedList;
 import java.util.List;
+import xdpr2.common.Message;
 
 public class Main {
 
