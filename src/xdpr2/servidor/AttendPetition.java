@@ -31,6 +31,7 @@ public class AttendPetition extends Thread {
                 if(act != null) {
                     db.updateDataOfSanitaryRegion(act);
                     region = act.getSanaitaryRegion();
+                    nMessages++;
                 }
             } while(act != null);
 
