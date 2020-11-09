@@ -11,15 +11,26 @@ import java.util.List;
 
 import xdpr2.common.Message;
 
+/**
+ * Classe per atendre una peticio del servidor
+ */
 public class AttendPetition extends Thread {
     private Socket connectionSocket;
     private DataBase db;
 
+    /**
+     * Constructor per puguer instanciar la classe
+     * @param connectionSocket Socket pel qual hem rebut la connexio
+     * @param db Base de dades a utilitzar
+     */
     public AttendPetition(Socket connectionSocket, DataBase db) {
         this.connectionSocket = connectionSocket;
         this.db = db;
     }
 
+    /**
+     * Metode que s'executara a un thread per atendre a un client
+     */
     public void run() {
         try {
             ObjectOutputStream objectOutput = new ObjectOutputStream(connectionSocket.getOutputStream());

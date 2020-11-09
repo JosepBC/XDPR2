@@ -3,6 +3,9 @@ package xdpr2.servidor;
 import java.sql.*;
 import xdpr2.common.Message;
 
+/**
+ * Classe per fer d'interficie entrre les dades del Servidor, classe Message, i una base de dades MySql
+ */
 public class DataBase {
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_URL = "jdbc:mysql://localhost/?serverTimezone=Europe/Madrid";
@@ -14,6 +17,11 @@ public class DataBase {
     private Connection con = null;
     private Statement st = null;
 
+    /**
+     * Metode per crear una nova taula a la base de dades
+     * @param sanitaryRegion Nom de la taula a crear
+     * @throws SQLException Si l'execucio de la comanda SQL falla
+     */
     private void createTable(String sanitaryRegion) throws SQLException {
         String sqlSt = "CREATE TABLE " + sanitaryRegion + " " +
                         " (positives int, " +
@@ -25,6 +33,12 @@ public class DataBase {
         st.executeUpdate(sqlSt);
     }
 
+    /**
+     * Comprobar si una taula amb un nom en particualr existeix a la base de dades
+     * @param name Nom de la taula a cercar
+     * @return True si existeix, false en cas contrari
+     * @throws SQLException Si l'execucio de la comanda SQL falla
+     */
     private boolean tableExists(String name) throws SQLException {
         String checkName = "SELECT count(*) " +
                            "AS nElem " +
@@ -37,8 +51,9 @@ public class DataBase {
     }
 
     /**
-     * Afegeix un nou msg a la taula adient de la base de dades.
+     * Afegeix un nou msg a la taula adient de la base de dades
      * @param newMsg Nou msg a afegir a la base de dades
+     * @throws SQLException Si l'execucio de la comanda SQL falla
      */
     public void updateDataOfSanitaryRegion(Message newMsg) throws SQLException {
         if(!tableExists(newMsg.getSanitaryRegion())) createTable(newMsg.getSanitaryRegion());
@@ -48,10 +63,10 @@ public class DataBase {
      }
 
     /**
-     * Donada una regió sanitaria, existent a la base de dades, retorna un objecte de la classe Message amb les mitjanes de les dadess d'aquella regió per les últimes 24 hores
-     * @param sanitaryRegion Regió sanitaria de la cual volem obtenir la mitjana
-     * @return null si la taula no existeix sino, objecte amb les mitjanes de les ultimes 24h
-     * @throws SQLException
+     * Donada una regio sanitaria, existent a la base de dades, retorna un objecte de la classe Message amb les mitjanes de les dades d'aquella regio per les ultimes 24 hores
+     * @param sanitaryRegion Regio sanitaria de la cual volem obtenir la mitjana
+     * @return null si la taula no existeix sino, objecte amb les mitjanes de les ultimes 24h en cas contrari
+     * @throws SQLException Si l'execucio de la comanda SQL falla
      */
     public Message getAvgLast24h(String sanitaryRegion) throws  SQLException {
         if(!tableExists(sanitaryRegion)) return null;
@@ -76,10 +91,17 @@ public class DataBase {
         return msg;
     }
 
+    /**
+     * Tancar corrrectament la connexio amb la base de dades
+     * @throws SQLException Si l'execucio de la comanda SQL falla
+     */
     public void close() throws SQLException {
         con.close();
     }
 
+    /**
+     * Constructor de la base de dades. Fa la connexió i crea la BD server en cas de que no existeixi
+     */
     public DataBase() {
         try {
             //Register JDBC driver

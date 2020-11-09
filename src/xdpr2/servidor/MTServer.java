@@ -5,7 +5,15 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.SQLException;
 
+/**
+ * Classe per gestionar el servidor multithread
+ */
 public class MTServer {
+    /**
+     * Crea un servidor multithread per atendre les peticions dels clients
+     * @param args Arguments d'entrada
+     * @throws SQLException Si hi ha algun error al tancar la base de dades
+     */
     public static void main(String[] args) throws SQLException {
         ServerSocket serverSocket = null;
         DataBase db = new DataBase();

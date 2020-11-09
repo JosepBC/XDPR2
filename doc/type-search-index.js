@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"com.servidor.xdpr2","l":"Main"},{"p":"com.servidor.xdpr2","l":"Message"}]
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"xdpr2.servidor","l":"AttendPetition"},{"p":"xdpr2.client","l":"Client"},{"p":"xdpr2.servidor","l":"DataBase"},{"p":"xdpr2.common","l":"Message"},{"p":"xdpr2.servidor","l":"MTServer"}]

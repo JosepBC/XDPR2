@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.servidor.xdpr2"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"xdpr2.client"},{"l":"xdpr2.common"},{"l":"xdpr2.servidor"}]
